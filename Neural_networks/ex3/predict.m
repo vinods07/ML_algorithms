@@ -5,10 +5,20 @@ function p = predict(Theta1, Theta2, X)
 
 % Useful values
 m = size(X, 1);
+n = size(X, 2);
 num_labels = size(Theta2, 1);
+num_columns = size(Theta1, 2);
+num_rows = size(Theta2, 2);
 
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
+temp = ones(m,1);
+temp2= [temp X];
+layer1_out = Theta1 * temp2';
+layer1_out = sigmoid(layer1_out);
+layer2_out = Theta2 * [ones(m,1)' ; layer1_out];
+layer2_out = sigmoid(layer2_out);
+[a p] = max(layer2_out', [], 2);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
@@ -20,14 +30,6 @@ p = zeros(size(X, 1), 1);
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
-
-
-
-
-
-
-
-
 
 % =========================================================================
 
